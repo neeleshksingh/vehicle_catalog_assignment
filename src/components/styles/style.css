@@ -60,3 +60,6 @@ h1{
     vertical-align: middle;
     text-align: center;
 }
+button{
+    cursor: pointer;
+}

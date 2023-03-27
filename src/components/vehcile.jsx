@@ -19,10 +19,7 @@ const Vehcile = () =>{
                     name : manufacturer.Mfr_Name,
                     country : manufacturer.Country,
                     type : type,
-                    head : manufacturer.Mfr_CommonName,
-                    designation : manufacturer.Designation,
-                    address : manufacturer.Address,
-                    state : manufacturer.State
+                    head : manufacturer.Mfr_CommonName
                 }
             })
             setData(manufacturers)
@@ -88,7 +85,7 @@ const Vehcile = () =>{
                         <p>{select.head}</p>
                         <p>{select.country}</p>
                         <p>{select.state}</p>
-                        <button onClick={()=>setShowPopup(false)}>Close</button>
+                        <button onClick={(e)=>{e.preventDefault(); setShowPopup(false)}}>Close</button>
                     </div>
                 )}
             </section>
