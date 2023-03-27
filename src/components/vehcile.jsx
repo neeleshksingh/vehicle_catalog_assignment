@@ -7,7 +7,7 @@ const Vehcile = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
   const [select, setSelect] = useState(null);
-
+  const [showPopup, setshowPopup] = useState(false)
 
   useEffect(() => {
     fetch(
@@ -51,6 +51,15 @@ const Vehcile = () => {
     );
   });
 
+  const OpenPopup = (manufacturer)=>{
+    setSelect(manufacturer)
+    setshowPopup(true)
+  }
+  const ClosePopup = ()=>{
+    setshowPopup(false)
+    setSelect(null)
+  }
+
   if (loading) {
     return <h1>Loading...</h1>;
   }
@@ -83,14 +92,9 @@ const Vehcile = () => {
           </select>
         </div>
       </section>
-      <section className="popup">
+      <section className="popup" style={{display : showPopup ? "block" : 'none'}}>
               {select && (
-                <div>
-                  <h2>{select.name}</h2>
-                  <p>{select.head}</p>
-                  <p>{select.address}</p>
-                  <p>{select.state}</p>
-                </div>
+               <span className="close" onClick={ClosePopup}></span>
               )}
             </section>
       <section className="table">
