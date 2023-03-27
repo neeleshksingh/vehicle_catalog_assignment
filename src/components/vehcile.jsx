@@ -88,6 +88,7 @@ const Vehcile = () =>{
                         <p>{select.head}</p>
                         <p>{select.country}</p>
                         <p>{select.state}</p>
+                        <button onClick={()=>setShowPopup(false)}>Close</button>
                     </div>
                 )}
             </section>
@@ -98,7 +99,6 @@ const Vehcile = () =>{
                                 <td>{manufacturer.name}</td>
                                 <td>{manufacturer.country}</td>
                                 <td>{manufacturer.type}</td>
-                                <button onClick={()=>setShowPopup(false)}>Close</button>
                             </tr>
                             )
                         })}
