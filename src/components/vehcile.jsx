@@ -27,9 +27,6 @@ const Vehcile = () =>{
         })
     },[])
 
-    const handleSearch = (e)=>{
-        setSearch(e.target.value)
-    }
 
     const filterData = data.filter((manufacturer)=>{
         const searchValue = search.trim().toLowerCase()
@@ -38,7 +35,7 @@ const Vehcile = () =>{
         const type = manufacturer.type.trim().toLowerCase()
         const filtervalue = filter.trim().toLowerCase()
         return(
-            (name.includes(searchValue) ||   country.includes(searchValue) && (filtervalue === "" || type === filtervalue))
+            (name.includes(searchValue) ||   country.includes(searchValue)) && (filtervalue === "" || type === filtervalue)
         )
     })
 
