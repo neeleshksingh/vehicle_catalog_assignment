@@ -7,6 +7,7 @@ const Vehcile = () =>{
     const [search, setSearch] = useState("")
     const [filter, setFilter] = useState("")
     const [select, setSelect] = useState(null)
+    const [showPopup, setShowPopup] = useState(false)
 
     useEffect(()=>{
         fetch('https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json&page=2')
@@ -82,20 +83,22 @@ const Vehcile = () =>{
                     <tbody>
                     <section className='popup'>
                 {select && (
-                    <div >
+                    <div className={`container flex-col ${showPopup ? 'blur' : ''}`}>
                         <h2>{select.name}</h2>
                         <p>{select.head}</p>
-                        <p>{select.address}</p>
+                        <p>{select.country}</p>
                         <p>{select.state}</p>
                     </div>
                 )}
             </section>
                         {filterData.map((manufacturer, index)=>{
                             return(
-                                <tr key={index} onClick={()=>setSelect(manufacturer)}>
+                                <tr key={index} onClick={()=>{setSelect(manufacturer)
+                                setShowPopup(true)}}>
                                 <td>{manufacturer.name}</td>
                                 <td>{manufacturer.country}</td>
                                 <td>{manufacturer.type}</td>
+                                <button onClick={()=>setShowPopup(false)}>Close</button>
                             </tr>
                             )
                         })}
