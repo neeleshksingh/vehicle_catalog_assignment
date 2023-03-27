@@ -5,6 +5,7 @@ const Vehcile = () =>{
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [search, setSearch] = useState("")
+    const [filter, setFilter] = useState("")
 
     useEffect(()=>{
         fetch('https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json&page=2')
@@ -35,8 +36,9 @@ const Vehcile = () =>{
         const name = manufacturer.name.trim().toLowerCase()
         const country = manufacturer.country.trim().toLowerCase()
         const type = manufacturer.type.trim().toLowerCase()
+        const filtervalue = filter.trim().toLowerCase()
         return(
-            name.includes(searchValue) ||   country.includes(searchValue) ||  type.includes(searchValue)
+            (name.includes(searchValue) ||   country.includes(searchValue) && (filtervalue === "" || type === filtervalue))
         )
     })
 
@@ -53,21 +55,16 @@ const Vehcile = () =>{
                 <div className='flex-row search-inp'>
                     <label htmlFor="search">Search</label>
                     <input type="text" value={search} onChange={(e)=>{setSearch(e.target.value)}} />
-                    <button onClick={handleSearch}>Search</button>
                 </div>
                 <div className='flex-row select'>
                     <label htmlFor="filter">Filter by Vehcile Types</label>
-                    <select>
+                    <select value={filter} onChange={(e)=> setFilter(e.target.value)}>
                         <option value="">All</option>
-                        <option value="">Passenger Car</option>
-                        <option value="">All</option>
-                        <option value="">All</option>
-                        <option value="">All</option>
-                        <option value="">All</option>
-                        <option value="">All</option>
-                        <option value="">All</option>
-                        <option value="">All</option>
-                        <option value="">All</option>
+                        <option value="Passenger Car">Passenger Car</option>
+                        <option value="Truck">Truck</option>
+                        <option value="Motorcycle">Motorcycle</option>
+                        <option value="Trailer">Trailer</option>
+                        <option value="Bus">Bus</option>
                     </select>
                 </div>
             </section>
@@ -81,7 +78,7 @@ const Vehcile = () =>{
                         </tr>
                     </thead>
                     <tbody>
-                        {data.map((manufacturer, index)=>{
+                        {filterData.map((manufacturer, index)=>{
                             return(
                                 <tr key={index}>
                                 <td>{manufacturer.name}</td>
